@@ -1,0 +1,14 @@
+.button {
+  background-color: $color-red;
+  color: white;
+  border: 0;
+  border-radius: 120px;
+  padding: 11px 30px;
+  border: 1px solid $color-red;
+  font-weight: 500;
+  &:hover {
+    background-color: white;
+    color: $color-red;
+    cursor: pointer;
+  }
+}

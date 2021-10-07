@@ -1,0 +1,31 @@
+.spinner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:before {
+    content: '';
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border-top: 10px solid #ccc;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid transparent;
+    position: absolute;
+    animation: spinn 2s infinite;
+  }
+
+  img {
+    width: 180px;
+  }
+}
+@keyframes spinn {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
