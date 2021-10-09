@@ -1,5 +1,5 @@
 {
-  "name": "product-feedback-app",
+  "name": "BSG-recruitment-task",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,8 +7,7 @@
     "start": "webpack serve --config webpack/webpack.config.js --env env=development",
     "build": "webpack --config webpack/webpack.config.js --env env=production",
     "lint": "eslint --fix \"./src/**/*.{js,jsx,ts,tsx,json}\"",
-    "format": "prettier --write \"./src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
-    "test": "jest --env=jsdom"
+    "format": "prettier --write \"./src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
   },
   "repository": {
     "type": "git",
@@ -58,7 +57,6 @@
   "dependencies": {
     "@babel/runtime": "7.15.4",
     "axios": "0.22.0",
-    "axios-auth-refresh": "^3.2.1",
     "prettier": "2.4.1",
     "react": "17.0.2",
     "react-cookie": "4.1.1",

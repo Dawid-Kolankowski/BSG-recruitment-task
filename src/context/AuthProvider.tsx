@@ -10,6 +10,7 @@ export const AuthContext = createContext({} as IAuthProvider);
 const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [token, setToken] = useState('');
   const [cookies, setCookie] = useCookies([TOKEN_COOKIE, REFRESH_TOKEN_COOKIE]);
+  const [authLoading, setLoading] = useState(true);
 
   const setAuth = (token: string, refreshToken: string) => {
     setToken(token);
@@ -20,21 +21,20 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   const refreshTokenOnLoad = async () => {
     const refreshTokenCookie = cookies[REFRESH_TOKEN_COOKIE];
 
-    const { Token, RefreshToken } = await refreshToken(refreshTokenCookie);
-    setAuth(Token, RefreshToken);
+    if (refreshTokenCookie) {
+      const authorization = await refreshToken(refreshTokenCookie);
+      setAuth(authorization?.Token, authorization?.RefreshToken);
+    }
+
+    setLoading(false);
   };
 
   useEffect(() => {
     refreshTokenOnLoad();
-    const tokenCookie = cookies[REFRESH_TOKEN_COOKIE];
-
-    if (tokenCookie) {
-      setToken(tokenCookie);
-    }
   }, []);
 
   return (
-    <AuthContext.Provider value={{ token, setAuth }}>
+    <AuthContext.Provider value={{ token, setAuth, authLoading }}>
       {children}
     </AuthContext.Provider>
   );

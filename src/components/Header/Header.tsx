@@ -10,7 +10,7 @@ const Header = ({ setAuth }: IAuthProvider) => {
     <div className="header">
       <img src={Logo} alt="BSG logo" />
       <Button
-        onClick={() => setAuth('')}
+        onClick={() => setAuth('', '')}
         label={BUTTON_LABEL}
         className="header__button"
       />

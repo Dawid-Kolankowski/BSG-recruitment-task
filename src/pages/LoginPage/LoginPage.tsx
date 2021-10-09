@@ -13,7 +13,7 @@ const EMAIL_LABEL = 'Email';
 const PASSWORD_LABEL = 'Password';
 const INPUT_ERROR = 'Missing email or password';
 
-const LoginPage = ({ setAuth }: IAuthProvider) => {
+const LoginPage = ({ setAuth, authLoading }: IAuthProvider) => {
   const email = useInput('test@bsgroup.eu');
   const password = useInput('Test12!@');
 
@@ -31,9 +31,9 @@ const LoginPage = ({ setAuth }: IAuthProvider) => {
 
     setIsLoading(true);
 
-    const { Token, RefreshToken } = await SignIn(email.value, password.value);
-    if (Token) {
-      setAuth(Token, RefreshToken);
+    const authorization = await SignIn(email.value, password.value);
+    if (authorization?.Token) {
+      setAuth(authorization.Token, authorization.RefreshToken);
       return;
     }
 
@@ -57,7 +57,11 @@ const LoginPage = ({ setAuth }: IAuthProvider) => {
     </form>
   );
 
-  return <div className="login">{isLoading ? <Spinner /> : renderForm}</div>;
+  return (
+    <div className="login">
+      {isLoading || authLoading ? <Spinner /> : renderForm}
+    </div>
+  );
 };
 
 export default withAuth(LoginPage);

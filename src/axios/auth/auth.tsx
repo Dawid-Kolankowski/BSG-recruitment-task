@@ -45,5 +45,8 @@ export const refreshToken = async (refreshToken: string) => {
 
   return axiosInstance
     .post(REFRESH_ENDPOINT, body)
-    .then((response: any) => response.data.AuthorizationToken);
+    .then((response: any) => response.data.AuthorizationToken)
+    .catch((error) => {
+      console.error(error);
+    });
 };

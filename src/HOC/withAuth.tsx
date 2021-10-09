@@ -7,9 +7,16 @@ const withAuth =
     Component: React.ComponentType<P>
   ): FC<Pick<P, Exclude<keyof P, keyof IAuthProvider>>> =>
   (props: Pick<P, Exclude<keyof P, keyof IAuthProvider>>) => {
-    const { token, setAuth } = useContext(AuthContext);
+    const { token, setAuth, authLoading } = useContext(AuthContext);
 
-    return <Component {...(props as P)} token={token} setAuth={setAuth} />;
+    return (
+      <Component
+        {...(props as P)}
+        token={token}
+        setAuth={setAuth}
+        authLoading={authLoading}
+      />
+    );
   };
 
 export default withAuth;
