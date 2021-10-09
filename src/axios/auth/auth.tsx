@@ -2,7 +2,10 @@ import axiosInstance from '../axiosInstance';
 import { toast } from 'react-toastify';
 
 const LOGIN_ENDPOINT = '/Authorization/SignIn';
+const REFRESH_ENDPOINT = '/Authorization/RefreshToken';
 
+const DEVICE_NAME = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx';
+const PLATFORM_CODE = 'WEB';
 const LoginError = () => (
   <>
     <div>Wrong Credentials, use following:</div>
@@ -12,13 +15,35 @@ const LoginError = () => (
 );
 
 export const SignIn = async (email: string, password: string) => {
-  body = { username: email, password };
+  const body = {
+    username: email,
+    password,
+    Device: {
+      Name: DEVICE_NAME,
+      PlatformCode: PLATFORM_CODE,
+    },
+  };
+
   return axiosInstance
-    .post(LOGIN_ENDPOINT)
+    .post(LOGIN_ENDPOINT, body)
     .then((response: any) => {
-      return response.data.AuthorizationToken.Token;
+      return response.data.AuthorizationToken;
     })
     .catch(() => {
       toast.error(<LoginError />);
     });
+};
+
+export const refreshToken = async (refreshToken: string) => {
+  const body = {
+    Token: refreshToken,
+    Device: {
+      Name: DEVICE_NAME,
+      PlatformCode: PLATFORM_CODE,
+    },
+  };
+
+  return axiosInstance
+    .post(REFRESH_ENDPOINT, body)
+    .then((response: any) => response.data.AuthorizationToken);
 };

@@ -1,4 +1,4 @@
 export interface IAuthProvider {
   token: string;
-  setAuth: (token: string) => void;
+  setAuth: (token: string, refreshToken: string) => void;
 }

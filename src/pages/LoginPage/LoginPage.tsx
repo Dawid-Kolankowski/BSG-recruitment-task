@@ -31,9 +31,9 @@ const LoginPage = ({ setAuth }: IAuthProvider) => {
 
     setIsLoading(true);
 
-    const jwt = await SignIn(email.value, password.value);
-    if (jwt) {
-      setAuth(jwt);
+    const { Token, RefreshToken } = await SignIn(email.value, password.value);
+    if (Token) {
+      setAuth(Token, RefreshToken);
       return;
     }
 
