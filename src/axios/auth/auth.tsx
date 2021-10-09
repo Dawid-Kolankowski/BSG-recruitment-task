@@ -12,8 +12,9 @@ const LoginError = () => (
 );
 
 export const SignIn = async (email: string, password: string) => {
+  body = { username: email, password };
   return axiosInstance
-    .post(LOGIN_ENDPOINT, { username: email, password })
+    .post(LOGIN_ENDPOINT)
     .then((response: any) => {
       return response.data.AuthorizationToken.Token;
     })

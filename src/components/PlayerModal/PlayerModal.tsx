@@ -21,9 +21,11 @@ const PlayerModal = ({ switchModal, title, token, id }: IPlayerModal) => {
 
   const getData = async () => {
     const url = await getMediaPlayInfo(token, id);
+    console.log(url);
     if (url) {
       setUrl(url);
     } else {
+      toast(PLAYER_ERROR_MESSAGE);
       switchModal();
     }
   };
