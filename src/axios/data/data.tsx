@@ -6,7 +6,7 @@ const MEDIA_PLAY_ENDPOINT = '/Media/GetMediaPlayInfo';
 
 const BEARER = 'Bearer ';
 
-const ERROR_MESSAGE = 'Something went wrong, try again later';
+const ERROR_MESSAGE = 'Something went wrong, try to log in again';
 
 const getAuthHeader = (token: string) => {
   return {
@@ -41,5 +41,8 @@ export const getMediaPlayInfo = (token: string, MediaId: number) => {
   };
   return axiosInstance
     .post(MEDIA_PLAY_ENDPOINT, body, getAuthHeader(token))
-    .then((response: any) => console.log(response.data));
+    .then((response: any) => response.data.ContentUrl)
+    .catch(() => {
+      toast(ERROR_MESSAGE);
+    });
 };

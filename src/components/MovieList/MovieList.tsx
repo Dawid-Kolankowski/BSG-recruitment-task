@@ -25,7 +25,6 @@ const MovieList = ({ token, page }: IMovieList) => {
 
   const getImage = (Images: [any]) => {
     const image = Images.filter((image) => image.ImageTypeCode === IMAGE_TYPE);
-    console.log(image);
     return image[0]?.Url;
   };
 
@@ -35,7 +34,6 @@ const MovieList = ({ token, page }: IMovieList) => {
   }, [page]);
 
   const renderCards = () => {
-    console.log(movieList);
     return movieList.map((movie) => {
       const { Title, Id, Images } = movie;
 

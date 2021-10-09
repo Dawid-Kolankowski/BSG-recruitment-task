@@ -30,16 +30,15 @@ const Card = ({ title, imageUrl, id }: ICard) => {
   };
 
   return (
-    <div aria-hidden="true" className="card" onClick={() => switchModal()}>
-      {renderImage}
-      <h2 className="card__title">{title}</h2>
-      <PlayerModal
-        switchModal={switchModal}
-        title={title}
-        showModal={showModal}
-        id={id}
-      />
-    </div>
+    <>
+      <div aria-hidden="true" className="card" onClick={() => switchModal()}>
+        {renderImage}
+        <h2 className="card__title">{title}</h2>
+      </div>
+      {showModal ? (
+        <PlayerModal switchModal={switchModal} title={title} id={id} />
+      ) : null}
+    </>
   );
 };
 
