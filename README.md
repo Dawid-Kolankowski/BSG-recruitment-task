@@ -8,4 +8,4 @@ To run project:
 4. Run "npm start" command
 5. Navigate to http://localhost:3000/ in your browser
 
-\* You need no have node package manager installed on your machine in order to run install and start commands
+\* You need to have node package manager installed on your machine in order to run install and start commands
