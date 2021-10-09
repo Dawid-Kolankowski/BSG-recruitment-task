@@ -5,7 +5,7 @@ import AuthProvider from './context/AuthProvider';
 import { BrowserRouter as Router } from 'react-router-dom';
 import PrivateRoute from './components/CustomRoutes/PrivateRoute';
 import PublicRoute from './components/CustomRoutes/PublicRoute';
-import MovieCatalog from './pages/MoviePage/MovieCatalog';
+import MoviePage from './pages/MoviePage/MoviePage';
 import { CookiesProvider } from 'react-cookie';
 
 const App = () => {
@@ -14,7 +14,7 @@ const App = () => {
       <AuthProvider>
         <ToastContainer />
         <Router>
-          <PrivateRoute path="/" component={MovieCatalog} />
+          <PrivateRoute path="/" component={MoviePage} />
           <PublicRoute path="/login" component={LoginPage} restricted />
         </Router>
       </AuthProvider>

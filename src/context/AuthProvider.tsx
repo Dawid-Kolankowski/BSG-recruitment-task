@@ -1,24 +1,30 @@
 import { useState, useEffect, createContext, ReactNode } from 'react';
 import { IAuthProvider } from './types';
 import { useCookies } from 'react-cookie';
-import { TOKEN_COOKIE } from '../utils/constants';
+
+const TOKEN_COOKIE = 'token';
 
 export const AuthContext = createContext({} as IAuthProvider);
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [token, setToken] = useState('');
-  const [cookies] = useCookies([TOKEN_COOKIE]);
+  const [cookies, setCookie] = useCookies([TOKEN_COOKIE]);
 
   useEffect(() => {
     const tokenCookie = cookies[TOKEN_COOKIE];
-    console.log(tokenCookie);
+
     if (tokenCookie) {
       setToken(tokenCookie);
     }
   }, []);
 
+  const setAuth = (token: string) => {
+    setToken(token);
+    setCookie(TOKEN_COOKIE, token);
+  };
+
   return (
-    <AuthContext.Provider value={{ token, setToken }}>
+    <AuthContext.Provider value={{ token, setAuth }}>
       {children}
     </AuthContext.Provider>
   );

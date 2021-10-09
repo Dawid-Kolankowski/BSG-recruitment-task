@@ -8,19 +8,16 @@ import { SignIn } from '../../axios/auth/auth';
 import { toast } from 'react-toastify';
 import withAuth from '../../HOC/withAuth';
 import { IAuthProvider } from '../../context/types';
-import { useCookies } from 'react-cookie';
-import { TOKEN_COOKIE } from '../../utils/constants';
 
 const EMAIL_LABEL = 'Email';
 const PASSWORD_LABEL = 'Password';
 const INPUT_ERROR = 'Missing email or password';
 
-const LoginPage = ({ setToken }: IAuthProvider) => {
+const LoginPage = ({ setAuth }: IAuthProvider) => {
   const email = useInput('test@bsgroup.eu');
   const password = useInput('Test12!@');
 
   const [isLoading, setIsLoading] = useState(false);
-  const [, setCookie] = useCookies([TOKEN_COOKIE]);
 
   const isEmailAndPassword = () => email.value && password.value;
 
@@ -36,8 +33,7 @@ const LoginPage = ({ setToken }: IAuthProvider) => {
 
     const jwt = await SignIn(email.value, password.value);
     if (jwt) {
-      setCookie(TOKEN_COOKIE, jwt);
-      setToken(jwt);
+      setAuth(jwt);
       return;
     }
 

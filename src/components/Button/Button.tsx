@@ -4,11 +4,12 @@ interface ButtonProps {
   label: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   style?: CSSProperties;
+  className?: string;
 }
 
-const Button = ({ label, onClick, style }: ButtonProps) => {
+const Button = ({ label, onClick, style, className }: ButtonProps) => {
   return (
-    <button style={style} className="button" onClick={onClick}>
+    <button style={style} className={`button ${className}`} onClick={onClick}>
       {label}
     </button>
   );

@@ -1,0 +1,13 @@
+.header {
+  max-width: $container-width;
+  display: flex;
+  align-items: center;
+  padding: 20px 0;
+  &__button {
+    margin-left: auto;
+  }
+
+  img {
+    height: 30px;
+  }
+}
